@@ -1,0 +1,7 @@
+# Journaux et réglages générés à l'exécution (côté utilisateur)
+*.log
+PartageCOM.json
+
+# Divers
+Thumbs.db
+desktop.ini
