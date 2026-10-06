@@ -130,3 +130,20 @@ d'architecture correspondantes sont dans `docs/adr/`.
 43. **Rétention du journal : 7 jours.** `Prune-Log` au démarrage. → ADR-0012.
 
 44. **Mise en place du dépôt git**, de ce CHAT.md, des ADR et de CLAUDE.md.
+
+## Suite (après v1.00)
+
+45. **Priorité / lenteur au-delà de 2 ports.** Explication : pas de priorité
+    possible (hub4com ne fait pas d'arbitrage, la radio traite une requête à la
+    fois) ; seul levier = brider le polling des logiciels secondaires
+    (surtout HRD). Aucune modification du soft.
+
+46. **Fonctionnement hors Internet.** Confirmé : le .bat est 100 % autonome.
+
+47. **Case « Garder la fenêtre au premier plan »** (TopMost), mémorisée.
+    → ADR-0015.
+
+48. **Réglages de hauteur de fenêtre / position de « F5PBG »** pour garder la
+    signature visible.
+
+49. **Boîte de sélection (Détecter) forcée au premier plan.** → ADR-0015.

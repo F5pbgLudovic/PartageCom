@@ -87,7 +87,7 @@ function Find-Com0comDir {
     return "C:\Program Files (x86)\com0com"
 }
 
-$cfg = @{ PortRadio = "COM5"; Virtuel1 = 14; Virtuel2 = 15; Virtuel3 = 0; Virtuel4 = 0; Virtuel5 = 0; Baud = 38400; BTId = ""; AutoBT = $false; AutoBTHours = 6 }
+$cfg = @{ PortRadio = "COM5"; Virtuel1 = 14; Virtuel2 = 15; Virtuel3 = 0; Virtuel4 = 0; Virtuel5 = 0; Baud = 38400; BTId = ""; AutoBT = $false; AutoBTHours = 6; TopMost = $false }
 if (Test-Path $script:configFile) {
     try {
         $saved = Get-Content $script:configFile -Raw | ConvertFrom-Json
@@ -106,6 +106,7 @@ function Save-Config {
     $cfg.BTId      = $txtBTId.Text.Trim()
     $cfg.AutoBT     = $chkAutoBT.Checked
     $cfg.AutoBTHours = [int]$cbAutoBTHours.Text
+    $cfg.TopMost    = $chkTop.Checked
     try { $cfg | ConvertTo-Json | Set-Content $script:configFile -Encoding UTF8 } catch {}
 }
 
@@ -435,6 +436,7 @@ function Select-BTDevice {
     $dlg.StartPosition = "CenterParent"
     $dlg.FormBorderStyle = "FixedDialog"
     $dlg.MaximizeBox = $false; $dlg.MinimizeBox = $false
+    $dlg.TopMost = $true
 
     $info = New-Object System.Windows.Forms.Label
     $info.Text = "Interface liee au port $port (le dongle USB est recommande) :"
@@ -551,7 +553,7 @@ function Scheduled-BTReset {
 # --- Interface ---# --- Interface ---
 $form = New-Object System.Windows.Forms.Form
 $form.Text = "PartageCOM V1.00 @F5PBG 2026 - Partage de port série"
-$form.Size = New-Object System.Drawing.Size(520, 625)
+$form.Size = New-Object System.Drawing.Size(520, 640)
 $form.StartPosition = "CenterScreen"
 $form.FormBorderStyle = "FixedSingle"
 $form.MaximizeBox = $false
@@ -641,7 +643,7 @@ $lblSign.Text = "F5PBG"
 $lblSign.Font = New-Object System.Drawing.Font("Segoe UI", 9, [System.Drawing.FontStyle]::Bold)
 $lblSign.ForeColor = [System.Drawing.Color]::Gray
 $lblSign.AutoSize = $true
-$lblSign.Location = New-Object System.Drawing.Point(432, 575)
+$lblSign.Location = New-Object System.Drawing.Point(432, 583)
 $form.Controls.Add($lblSign)
 
 $chkAuto = New-Object System.Windows.Forms.CheckBox
@@ -688,6 +690,14 @@ if ($cbAutoBTHours.Items.Contains("$($cfg.AutoBTHours)")) { $cbAutoBTHours.Selec
 $form.Controls.Add($cbAutoBTHours)
 
 Add-Label "heures" 418 537 | Out-Null
+
+$chkTop = New-Object System.Windows.Forms.CheckBox
+$chkTop.Text = "Garder la fenêtre au premier plan"
+$chkTop.Location = New-Object System.Drawing.Point(20, 562); $chkTop.AutoSize = $true
+$chkTop.Checked = [bool]$cfg.TopMost
+$form.Controls.Add($chkTop)
+$chkTop.Add_Click({ $form.TopMost = $chkTop.Checked })
+$form.TopMost = $chkTop.Checked
 
 $timer = New-Object System.Windows.Forms.Timer
 $timer.Interval = 5000
