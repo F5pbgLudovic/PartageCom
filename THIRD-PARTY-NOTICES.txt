@@ -1,0 +1,29 @@
+PartageCOM — composants tiers embarqués
+=======================================
+
+Le fichier PartageCOM.bat embarque et redistribue deux logiciels tiers issus
+du projet com0com, afin de fonctionner sans téléchargement supplémentaire.
+Ces composants restent la propriété de leurs auteurs et sont diffusés sous
+leur propre licence (GNU General Public License, GPL).
+
+1) com0com — null-modem emulator (pilote de ports série virtuels)
+   Auteur : Vyacheslav Frolov et contributeurs du projet com0com.
+   Version embarquée : 3.0.0.0 (installeur signé, x86 et x64).
+   Site officiel : https://sourceforge.net/projects/com0com/
+   Miroir utilisé pour la version signée :
+       https://github.com/BrickBot/Archive  (dossier com0com)
+   Licence : GNU General Public License (GPL).
+
+2) hub4com — duplication d'un port série vers plusieurs ports (projet com0com)
+   Auteur : Vyacheslav Frolov et contributeurs du projet com0com.
+   Version embarquée : 2.1.0.0.
+   Site officiel : https://sourceforge.net/projects/com0com/
+   Licence : GNU General Public License (GPL).
+
+Le texte complet de la GPL est disponible sur :
+   https://www.gnu.org/licenses/
+
+PartageCOM se contente de piloter ces deux outils (création des paires de
+ports, lancement de hub4com) et d'y ajouter une interface. Le code source de
+com0com et de hub4com est disponible aux adresses ci-dessus, conformément à
+la GPL.
